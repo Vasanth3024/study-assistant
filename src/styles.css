@@ -1,0 +1,93 @@
+:root {
+  --paper: #eef1f6; --card: #ffffff; --ink: #16213e; --muted: #56607a;
+  --rule: #c9d3e6; --margin: #e0524d; --mark: #ffe066; --mark-ink: #16213e;
+  --good: #1f7a4d; --bad: #b42318; --accent: #16213e; --accent-ink: #ffffff;
+  --display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --serif: 'Literata', Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0f1420; --card: #182033; --ink: #e8ecf6; --muted: #9aa5bf;
+    --rule: #2a3652; --good: #6fd3a0; --bad: #ff8f85; --accent: #e8ecf6; --accent-ink: #0f1420;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.55 var(--display); -webkit-font-smoothing: antialiased; }
+.app { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2rem, 7vw, 3rem); font-weight: 800; letter-spacing: -0.03em; }
+h2 { font-size: 1.35rem; font-weight: 600; }
+.masthead { margin-bottom: 24px; }
+.masthead p { color: var(--muted); margin: 8px 0 0; }
+
+:focus-visible { outline: 3px solid var(--mark); outline-offset: 2px; box-shadow: 0 0 0 5px var(--ink); }
+mark { background: var(--mark); color: var(--mark-ink); padding: 0 .2em; border-radius: 2px; }
+
+/* input */
+.input-panel { display: grid; gap: 8px; }
+.input-panel > label { font-weight: 600; }
+textarea, select { font: inherit; color: inherit; background: var(--card); border: 1.5px solid var(--rule); border-radius: 8px; padding: 12px; width: 100%; }
+textarea { resize: vertical; font-family: var(--serif); }
+textarea[aria-invalid="true"] { border-color: var(--bad); }
+.help { display: flex; justify-content: space-between; font-size: .875rem; color: var(--muted); }
+.help.bad { color: var(--bad); }
+.controls { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.inline { display: flex; gap: 8px; align-items: center; font-weight: 600; }
+.inline select { width: auto; padding: 8px 10px; }
+
+/* buttons */
+.btn { font: inherit; font-weight: 600; border-radius: 8px; padding: 10px 18px; min-height: 44px; cursor: pointer; border: 1.5px solid var(--ink); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--rule); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.link { background: none; border: 0; padding: 0; color: var(--ink); text-decoration: underline; cursor: pointer; font: inherit; }
+
+/* panels & states */
+.results { margin-top: 32px; }
+.panel { background: var(--card); border: 1.5px solid var(--rule); border-radius: 10px; padding: 20px; display: grid; gap: 12px; justify-items: start; }
+.panel p { margin: 0; color: var(--muted); }
+.panel.error { border-color: var(--bad); }
+.skeleton { height: 14px; width: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--rule), transparent, var(--rule)); background-size: 200% 100%; animation: shimmer 1.4s linear infinite; }
+.skeleton.short { width: 60%; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* deck */
+.deck-head { margin-bottom: 14px; }
+.deck-head p { margin: 4px 0 0; color: var(--muted); }
+.tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 1.5px solid var(--rule); }
+.tabs button { font: inherit; font-weight: 600; background: none; border: 0; padding: 10px 16px; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1.5px; min-height: 44px; }
+.tabs button.on { color: var(--ink); border-bottom-color: var(--margin); }
+
+/* flashcard: an index card with ruled lines and a red top rule */
+.card { display: flex; flex-direction: column; gap: 12px; width: 100%; min-height: 280px; text-align: left; font: inherit; color: var(--ink); cursor: pointer;
+  background: repeating-linear-gradient(transparent 0 31px, var(--rule) 31px 32px) 0 52px / 100% 100% no-repeat, var(--card);
+  border: 1.5px solid var(--rule); border-top: 3px solid var(--margin); border-radius: 6px; padding: 18px 20px; animation: flip .28s ease-out; }
+.side { font-size: .8rem; font-weight: 600; color: var(--muted); }
+.card-text { font-family: var(--serif); font-size: 1.3rem; line-height: 32px; }
+.card-text.answer { font-weight: 600; }
+.card-note { font-family: var(--serif); color: var(--muted); line-height: 1.5; }
+.hint { margin-top: auto; font-size: .8rem; color: var(--muted); }
+@keyframes flip { from { opacity: 0; transform: rotateX(-14deg) translateY(4px); } }
+.nav { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; color: var(--muted); }
+
+/* quiz */
+.progress { width: 100%; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
+.progress div { height: 100%; background: var(--margin); transition: width .3s; }
+.meta { font-size: .875rem; }
+.q { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; line-height: 1.4; }
+.options { display: grid; gap: 8px; width: 100%; }
+.option { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; font: inherit; color: var(--ink); background: var(--paper); border: 1.5px solid var(--rule); border-radius: 8px; padding: 12px 14px; min-height: 48px; cursor: pointer; }
+.option:not(:disabled):hover { border-color: var(--ink); }
+.option span { flex: 1; }
+.option kbd { font: 600 .8rem var(--display); border: 1px solid var(--rule); border-radius: 4px; padding: 1px 6px; color: var(--muted); }
+.option.right { border-color: var(--good); border-width: 2px; }
+.option.wrong { border-color: var(--bad); border-width: 2px; }
+.option.right b { color: var(--good); } .option.wrong b { color: var(--bad); }
+.option.dim { opacity: .55; }
+.option:disabled { cursor: default; }
+.feedback { display: grid; gap: 12px; justify-items: start; border-top: 1.5px solid var(--rule); padding-top: 12px; width: 100%; }
+.feedback p { color: var(--ink); }
+.missed { padding-left: 18px; margin: 0; display: grid; gap: 10px; text-align: left; }
+
+@media (max-width: 480px) { .card-text { font-size: 1.15rem; } .controls { flex-direction: column-reverse; align-items: stretch; } .controls .btn { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
