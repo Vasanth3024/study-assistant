@@ -1,0 +1,25 @@
+{
+  "name": "study-assistant",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "concurrently -k -n api,web \"npm:server\" \"npm:dev\"",
+    "dev": "vite",
+    "server": "node server/index.js",
+    "build": "vite build",
+    "serve": "vite build && node server/index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "concurrently": "^9.0.1",
+    "vite": "^5.4.10"
+  }
+}
